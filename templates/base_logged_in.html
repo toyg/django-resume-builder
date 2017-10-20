@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% comment %}
+Base template for authenticated pages in the resume builder project (excluding
+the Django admin)
+{% endcomment %}
+
+{% load static %}
+
+{% block styles %}
+  <style>
+    body > div.container {
+      margin-top: 3%;
+      margin-bottom: 3%;
+    }
+    #logout-button {
+      margin-right: 10px;
+    }
+    nav.navbar-default {
+      border: 1px solid #aaa;
+      border-radius: 3px;
+    }
+  </style>
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <nav class="navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Resume Builder</a>
+        </div>
+
+        <ul class="nav navbar-nav">
+          <li role="presentation" {% if "/resume/" in request.path %}class="active"{% endif %}>
+            <a href="/resume/">Resume</a>
+          </li>
+        </ul>
+
+        <div class="navbar-right">
+          <a class="btn btn-default navbar-btn" id="logout-button" href="/logout/">
+            Log out
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+  </div>
+{% endblock %}

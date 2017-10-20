@@ -102,3 +102,9 @@ ENV/
 
 # PyCharm files
 .idea
+
+# Django secret key
+secret_key.txt
+
+# Local database
+db.sqlite3

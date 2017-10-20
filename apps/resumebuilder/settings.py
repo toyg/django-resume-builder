@@ -10,17 +10,43 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
+import errno
 import os
 
+from django.utils.crypto import get_random_string
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(
+    os.path.abspath(__file__)
+)))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '=q_1hv$-=8+k=_+d-=8r8t_v=wqhi%r9-vdlw5qupt@7g=ljk='
+# Generate a secret key if one does not exist. We can do this because requests
+# will never be split between multiple servers - we use a local DB (for now).
+secret_key_filename = os.path.join(BASE_DIR, 'secret_key.txt')
+if not os.path.exists(os.path.dirname(secret_key_filename)):
+    try:
+        os.makedirs(os.path.dirname(secret_key_filename))
+    except OSError as exc:  # Guard against race condition
+        if exc.errno != errno.EEXIST:
+            raise
+try:
+    with open(secret_key_filename, 'r') as secret_key_file:
+        SECRET_KEY = secret_key_file.readline()
+except IOError:
+    try:
+        with open(secret_key_filename, 'w') as secret_key_file:
+            secret_key = get_random_string(
+                50, 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)')
+            secret_key_file.write(secret_key)
+            SECRET_KEY = secret_key
+    except IOError:
+        raise RuntimeError(
+            "Secret key could not be created at {}".format(secret_key_filename)
+        )
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +63,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'apps.resume',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +82,7 @@ ROOT_URLCONF = 'apps.resumebuilder.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,3 +150,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
+LOGIN_URL = '/login/'
+LOGOUT_REDIRECT_URL = '/'

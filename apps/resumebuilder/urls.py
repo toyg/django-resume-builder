@@ -15,7 +15,18 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
+from django.views.generic import RedirectView
+
+from ..resume import views as resume_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+
+    url('^login/$', auth_views.LoginView.as_view(), name='login'),
+    url('^logout/$', auth_views.LogoutView.as_view(), name='logout'),
+
+    url(r'^$', RedirectView.as_view(pattern_name='resume')),
+
+    url(r'^resume/$', resume_views.resume_view, name='resume'),
 ]

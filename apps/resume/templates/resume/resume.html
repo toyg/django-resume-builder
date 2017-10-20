@@ -1,0 +1,71 @@
+{% extends "base_logged_in.html" %}
+
+{% comment %}
+Template for viewing a resume.
+{% endcomment %}
+
+{% block styles %}
+  {{ block.super }}
+
+  <style>
+    div.resume-container {
+      margin: 0 auto;
+      max-width: 800px;
+    }
+
+    div.header-center-container {
+      text-align: center;
+    }
+
+    div.header-container {
+      text-align: left;
+
+      display: inline-block;
+    }
+
+    div.header-container > h3 {
+      margin-top: 0;
+
+      color: #666666;
+    }
+
+    section.resume-item {
+      margin-top: 36px;
+
+      position: relative;
+    }
+
+    section.resume-item > a.btn {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    div.resume-container > a.btn {
+      margin-top: 24px;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="container resume-container">
+    <div class="header-center-container">
+      <div class="header-container">
+        <h1>{{ request.user.first_name }} {{ request.user.last_name }}</h1>
+        <h3>{{ request.user.email }}</h3>
+      </div>
+    </div>
+
+    {% for resume_item in resume_items %}
+      <section class="resume-item">
+        <h3>{{ resume_item.title }}</h3>
+        <h4>{{ resume_item.company }}</h4>
+        <h4>{{ resume_item.start_date | date:"M Y"}} - {% if resume_item.end_date %}{{ resume_item.end_date | date:"M Y"}}{% else %}Present{% endif %}</h4>
+        {% if resume_item.description %}<p>{{ resume_item.description }}</p>{% endif %}
+        <a class="btn btn-primary">Edit</a>
+      </section>
+    {% endfor %}
+
+    <a class="btn btn-success">Create New Item</a>
+  </div>
+{% endblock %}
