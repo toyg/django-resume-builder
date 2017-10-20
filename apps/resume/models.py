@@ -15,7 +15,7 @@ class ResumeItem(models.Model):
     # Null end date indicates position is currently held
     end_date = models.DateField(null=True, blank=True)
 
-    description = models.CharField(max_length=2047, blank=True)
+    description = models.TextField(max_length=2047, blank=True)
 
     def __unicode__(self):
         return "{}: {} at {} ({})".format(self.user.username,

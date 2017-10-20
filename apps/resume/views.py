@@ -6,6 +6,9 @@ from .models import ResumeItem
 
 @login_required
 def resume_view(request):
+    """
+    Handle a request to view a user's resume.
+    """
     resume_items = ResumeItem.objects\
         .filter(user=request.user)\
         .order_by('-start_date')

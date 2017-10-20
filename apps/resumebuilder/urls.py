@@ -19,6 +19,7 @@ from django.contrib.auth import views as auth_views
 from django.views.generic import RedirectView
 
 from ..resume import views as resume_views
+from ..user import views as user_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -29,4 +30,6 @@ urlpatterns = [
     url(r'^$', RedirectView.as_view(pattern_name='resume')),
 
     url(r'^resume/$', resume_views.resume_view, name='resume'),
+
+    url(r'^user/$', user_views.account_edit_view, name='account-edit'),
 ]

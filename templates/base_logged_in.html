@@ -35,6 +35,9 @@ the Django admin)
           <li role="presentation" {% if "/resume/" in request.path %}class="active"{% endif %}>
             <a href="/resume/">Resume</a>
           </li>
+          <li role="presentation" {% if "/user/" in request.path %}class="active"{% endif %}>
+            <a href="/user/">User account</a>
+          </li>
         </ul>
 
         <div class="navbar-right">
