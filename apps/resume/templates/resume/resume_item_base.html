@@ -8,6 +8,10 @@ Base form template for creating and editing resume items.
   {{ block.super }}
 
   <style>
+    h1.resume-item-header {
+      margin-bottom: 24px;
+    }
+
     textarea#inputDescription {
       height: 120px;
     }
@@ -15,7 +19,7 @@ Base form template for creating and editing resume items.
 {% endblock %}
 
 {% block content %}
-  <h1>{% block resume_item_header_text %}{% endblock %}</h1>
+  <h1 class="resume-item-header">{% block resume_item_header_text %}{% endblock %}</h1>
 
   <form class="form-horizontal" action="" method="post">
     {% csrf_token %}

@@ -76,6 +76,13 @@ Template for editing user account information.
         {% csrf_token %}
 
         <div class="form-group">
+          <label for="inputOldPassword" class="col-md-4 control-label">Old Password</label>
+          <div class="col-md-8">
+            <input type="password" name="old_password" required
+                   class="form-control" id="inputOldPassword">
+          </div>
+        </div>
+        <div class="form-group">
           <label for="inputPassword" class="col-md-4 control-label">New Password</label>
           <div class="col-md-8">
             <input type="password" name="password" required

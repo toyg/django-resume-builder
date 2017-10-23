@@ -64,11 +64,17 @@ def _handle_change_password(user, post_data):
     :param post_data: The input form data.
     :raise FormInputError: If the input form data is not valid.
     """
+    if 'old_password' not in post_data:
+        raise FormInputError('Old password is required')
     if ('password' not in post_data) or ('password2' not in post_data):
-        raise FormInputError('Both passwords must be provided')
+        raise FormInputError('Both new passwords must be provided')
+
+    if not user.check_password(post_data['old_password']):
+        raise FormInputError('Your old password was entered incorrectly. '
+                             'Please enter it again.')
 
     if post_data['password'] != post_data['password2']:
-        raise FormInputError('Passwords do not match')
+        raise FormInputError('New passwords do not match')
 
     user.set_password(post_data['password'])
     user.save()
