@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
+{% comment %}
+The login page template. This is located at /registration/login.html in order
+to use the built-in Django login view.
+{% endcomment %}
+
 {% load static %}
 
 {% block styles %}
@@ -10,7 +15,7 @@
       z-index:15;
       top:40%;
       left:50%;
-      margin:-100px 0 0 -150px;
+      margin:-100px 0 0 -160px;
       background-color: white;
       padding:20px;
       color:#555;
@@ -18,11 +23,10 @@
       border-radius: 4px;
     }
 
-  #login-container > h1 {
-    margin-top: 0;
-    margin-bottom: 24px;
-  }
-
+    #login-container > h1 {
+      margin-top: 0;
+      margin-bottom: 24px;
+    }
   </style>
 {% endblock %}
 
@@ -44,15 +48,19 @@
 
         <div class="form-group">
           <input type="text" name="username" placeholder="Username"
+                 required
                  class="form-control">
         </div>
 
         <div class="form-group">
           <input type="password" name="password" placeholder="Password"
+                 required
                  class="form-control">
         </div>
 
-        <button type="submit" class="btn btn-primary">Log in</button>
+        <button type="submit" class="btn btn-default">Log in</button>
+        <a href="/create-account/" class="btn btn-primary">Create account</a>
+
         <input type="hidden" name="next" value="{{ next }}" />
       </form>
     </div><!-- row-fluid -->
