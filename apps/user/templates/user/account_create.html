@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block styles %}
+  <style>
+    #create-account-container {
+      max-width: 800px;
+      margin: 40px auto 0;
+
+      background-color: white;
+      padding: 20px;
+      border: 2px solid #555555;
+      border-radius: 4px;
+    }
+
+    #create-account-container > h1 {
+      margin-top: 0;
+      margin-bottom: 24px;
+    }
+  </style>
+{% endblock %}
+
+{% block body %}
+
+  <div class="container" id="create-account-container">
+    <h1>Create account</h1>
+
+    <form action="" method="post" class="form-horizontal">
+      {% csrf_token %}
+
+      <div class="row">
+
+        <div class="col-sm-6">
+          {{ form.username.errors }}
+          <div class="form-group">
+            <label for="inputUsername" class="col-md-4 control-label">Username</label>
+            <div class="col-md-8">
+              <input type="text" name="username" required
+                     class="form-control" id="inputUsername"
+                     {% if form.username.value %}value="{{ form.username.value }}"{% endif %}>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword" class="col-md-4 control-label">Password</label>
+            <div class="col-md-8">
+              <input type="password" name="password" required
+                     class="form-control" id="inputPassword">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword2" class="col-md-4 control-label">Repeat Pass</label>
+            <div class="col-md-8">
+              <input type="password" name="password2" required
+                     class="form-control" id="inputPassword2">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          {{ form.first_name.errors }}
+          <div class="form-group">
+            <label for="inputFirstName" class="col-md-4 control-label">First name</label>
+            <div class="col-md-8">
+              <input type="text" name="first_name" required
+                     class="form-control" id="inputFirstName"
+                     {% if form.first_name.value %}value="{{ form.first_name.value }}"{% endif %}>
+            </div>
+          </div>
+          {{ form.last_name.errors }}
+          <div class="form-group">
+            <label for="inputLastName" class="col-md-4 control-label">Last name</label>
+            <div class="col-md-8">
+              <input type="text" name="last_name" required
+                     class="form-control" id="inputLastName"
+                     {% if form.last_name.value %}value="{{ form.last_name.value }}"{% endif %}>
+            </div>
+          </div>
+          {{ form.email.errors }}
+          <div class="form-group">
+            <label for="inputEmail" class="col-md-4 control-label">Email</label>
+            <div class="col-md-8">
+              <input type="email" name="email" required
+                     class="form-control" id="inputEmail"
+                     {% if form.email.value %}value="{{ form.email.value }}"{% endif %}>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-12">
+          {% if error %}<p class="text-danger">{{ error }}</p>{% endif %}
+
+          <button type="submit" class="btn btn-primary">
+            Create
+          </button>
+          <a href="/" class="btn btn-default">Back</a>
+        </div>
+      </div>
+    </form>
+  </div>
+{% endblock %}

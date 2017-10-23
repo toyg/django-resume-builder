@@ -29,6 +29,14 @@ admin)
     body {
       background: url("{% static "subtle_dots.png" %}") repeat;
     }
+
+    ul.errorlist > li {
+      color: darkred;
+    }
+
+    label.non-required {
+      font-weight: normal;
+    }
   </style>
   {% block styles %}{% endblock %}
 </head>

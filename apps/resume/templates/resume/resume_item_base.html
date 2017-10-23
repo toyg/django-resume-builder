@@ -62,7 +62,7 @@ Base form template for creating and editing resume items.
       <div class="col-sm-6">
         {{ form.end_date.errors }}
         <div class="form-group">
-          <label for="inputEndDate" class="col-sm-3 control-label">End Date</label>
+          <label for="inputEndDate" class="col-sm-3 control-label non-required">End Date</label>
           <div class="col-sm-5">
             <input type="text" name="end_date" id="inputEndDate"
                    placeholder="YYYY-MM-DD"
@@ -77,7 +77,7 @@ Base form template for creating and editing resume items.
       <div class="col-sm-12">
         {{ form.description.errors }}
         <div class="form-group">
-          <label for="inputDescription" class="col-sm-1 control-label">Description</label>
+          <label for="inputDescription" class="col-sm-1 control-label non-required">Description</label>
           <div class="col-sm-9">
             <textarea type="text" name="description" id="inputDescription"
                       maxlength="2047"

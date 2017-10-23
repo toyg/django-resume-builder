@@ -1,7 +1,10 @@
-from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth import login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.http import HttpResponseBadRequest
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
+from .forms import CreateAccountForm
 
 
 @login_required
@@ -31,6 +34,30 @@ def account_edit_view(request):
             return HttpResponseBadRequest('Unknown account edit type')
 
     return render(request, 'user/account_edit.html', template_dict)
+
+
+def account_create_view(request):
+    """
+    Handle a request to create a new login account.
+    """
+    template_dict = {}
+
+    if request.method == 'POST':
+        form = CreateAccountForm(request.POST)
+
+        if form.is_valid():
+            try:
+                user = _handle_create_account(request.POST)
+                login(request, user)
+                return redirect('resume')
+            except FormInputError, e:
+                template_dict['error'] = str(e)
+    else:
+        form = CreateAccountForm()
+
+    template_dict['form'] = form
+
+    return render(request, "user/account_create.html", template_dict)
 
 
 def _handle_update_account_info(user, post_data):
@@ -78,6 +105,35 @@ def _handle_change_password(user, post_data):
 
     user.set_password(post_data['password'])
     user.save()
+
+
+def _handle_create_account(post_data):
+    """
+    Handle account creation form input.
+
+    :param post_data: The input form data. 'username' is assumed to have
+        already been validated.
+    :return: The newly-created Django User object.
+    :raise FormInputError: If the input form data is not valid.
+    """
+    if 'first_name' not in post_data:
+        raise FormInputError('First name is required')
+    if 'last_name' not in post_data:
+        raise FormInputError('Last name is required')
+    if ('password' not in post_data) or ('password2' not in post_data):
+        raise FormInputError('Both password fields are required')
+    if post_data['password'] != post_data['password2']:
+        raise FormInputError('Passwords do not match')
+
+    new_user = User.objects.create_user(post_data['username'],
+                                        post_data['email'],
+                                        post_data['password'])
+
+    new_user.first_name = post_data['first_name']
+    new_user.last_name = post_data['last_name']
+    new_user.save()
+
+    return new_user
 
 
 class FormInputError(Exception):

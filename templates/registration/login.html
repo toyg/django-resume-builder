@@ -10,15 +10,16 @@ to use the built-in Django login view.
 {% block styles %}
   <style>
     #login-container{
-      width:320px;
-      position:absolute;
-      z-index:15;
-      top:40%;
-      left:50%;
-      margin:-100px 0 0 -160px;
+      width: 320px;
+      position: absolute;
+      z-index: 15;
+      top: 40%;
+      left: 50%;
+      margin: -100px 0 0 -160px;
+
       background-color: white;
-      padding:20px;
-      color:#555;
+      padding: 20px;
+      color: #555;
       border: 2px solid #555555;
       border-radius: 4px;
     }
@@ -63,9 +64,6 @@ to use the built-in Django login view.
 
         <input type="hidden" name="next" value="{{ next }}" />
       </form>
-    </div><!-- row-fluid -->
-    <div class="row-fluid">
-
-    </div><!-- row-fluid -->
-  </div><!-- well (login-container) -->
+    </div>
+  </div>
 {% endblock %}
