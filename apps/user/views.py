@@ -1,3 +1,4 @@
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseBadRequest
 from django.shortcuts import render
@@ -20,6 +21,9 @@ def account_edit_view(request):
         elif 'changePassword' in request.POST:
             try:
                 _handle_change_password(request.user, request.POST)
+                # Updating the password invalidates all sessions; recreate the
+                # current one so the user doesn't have to log in again.
+                update_session_auth_hash(request, request.user)
                 template_dict['change_password_message'] = 'Password changed'
             except FormInputError, e:
                 template_dict['change_password_error'] = str(e)
