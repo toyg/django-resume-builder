@@ -64,10 +64,10 @@ Template for viewing a resume.
         <h4>{{ resume_item.company }}</h4>
         <h4>{{ resume_item.start_date | date:"M Y"}} - {% if resume_item.end_date %}{{ resume_item.end_date | date:"M Y"}}{% else %}Present{% endif %}</h4>
         {% if resume_item.description %}<p>{{ resume_item.description }}</p>{% endif %}
-        <a class="btn btn-primary">Edit</a>
+        <a class="btn btn-primary" href="/resume/item/edit/{{ resume_item.id }}/">Edit</a>
       </section>
     {% endfor %}
 
-    <a class="btn btn-success">Add New Item</a>
+    <a class="btn btn-success" href="/resume/item/create/">Add New Item</a>
   </div>
 {% endblock %}

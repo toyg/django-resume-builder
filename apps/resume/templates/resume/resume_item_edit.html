@@ -1,0 +1,25 @@
+{% extends "resume/resume_item_base.html" %}
+
+{% comment %}
+Template for editing a resume item.
+{% endcomment %}
+
+{% block styles %}
+  {{ block.super }}
+
+  <style>
+    button.delete-button {
+      float: right;
+    }
+  </style>
+{% endblock %}
+
+{% block resume_item_header_text %}Edit resume item{% endblock %}
+
+{% block resume_item_submit_button_text %}Edit{% endblock %}
+
+{% block resume_item_additional_buttons %}
+    <button type="submit" name="delete" class="btn btn-danger delete-button">
+      Delete
+    </button>
+{% endblock %}
