@@ -9,14 +9,14 @@ Template for viewing a resume.
 
   <style>
     div.resume-container {
-      margin: 0 auto;
+      margin: 24px auto 0;
       max-width: 800px;
     }
 
     div.header-center-container {
       text-align: center;
 
-      margin-top: 24px;
+      margin-top: 12px;
     }
 
     div.header-container {
@@ -45,12 +45,13 @@ Template for viewing a resume.
 
     div.resume-container > a.btn {
       margin-top: 24px;
+      margin-bottom: 24px;
     }
   </style>
 {% endblock %}
 
 {% block content %}
-  <div class="container resume-container">
+  <div class="container content-section resume-container">
     <div class="header-center-container">
       <div class="header-container">
         <h1>{{ request.user.first_name }} {{ request.user.last_name }}</h1>

@@ -9,7 +9,7 @@ This is the base project for the SteamaCo Django resume builder assessment.
 - Run `python manage.py migrate`
 - *Optional*: Create a superuser using `python manage.py createsuperuser`. This account may be used to access the Django admin site at `/admin/`.
 
-## Local Server
+## Local server
 `python manage.py runserver`
 
 ## Code style

@@ -11,112 +11,140 @@ Template for editing user account information.
     h2 {
       margin-bottom: 24px;
     }
+
+    div.account-edit-row {
+      margin-top: 24px;
+    }
+
+    div.update-account-section-outer {
+      padding-left: 0;
+    }
+
+    div.change-password-section-outer {
+      padding-right: 0;
+    }
+
+    div.account-edit-section-inner {
+      padding: 0 15px;
+    }
   </style>
 {% endblock %}
 
 {% block content %}
-  <div class="row">
+  <div class="container-fluid">
 
-    <div class="col-sm-6">
-      <h2>Update account info</h2>
-      <form action="" method="post" class="form-horizontal">
-        {% csrf_token %}
+    <div class="row account-edit-row">
 
-        <div class="form-group">
-          <label for="inputFirstName" class="col-md-4 control-label">First name</label>
-          <div class="col-md-8">
-            <input type="text" name="first_name" required
-                   class="form-control" id="inputFirstName"
-                   value="{{ request.user.first_name }}">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputLastName" class="col-md-4 control-label">Last name</label>
-          <div class="col-md-8">
-            <input type="text" name="last_name" required
-                   class="form-control" id="inputLastName"
-                   value="{{ request.user.last_name }}">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputEmail" class="col-md-4 control-label">Email</label>
-          <div class="col-md-8">
-            <input type="email" name="email" required
-                   class="form-control" id="inputEmail"
-                   value="{{ request.user.email }}">
-          </div>
-        </div>
+      <div class="col-sm-6 update-account-section-outer">
 
-        {% if update_info_message %}
-          <div class="col-md-offset-4 col-md-8">
-            <p class="text-success">{{ update_info_message }}</p>
-          </div>
-        {% endif %}
+        <div class="content-section account-edit-section-inner">
+          <h2>Update account info</h2>
+          <form action="" method="post" class="form-horizontal">
+            {% csrf_token %}
 
-        {% if update_info_error %}
-          <div class="col-md-offset-4 col-md-8">
-            <p class="text-danger">{{ update_info_error }}</p>
-          </div>
-        {% endif %}
+            <div class="form-group">
+              <label for="inputFirstName" class="col-md-4 control-label">First name</label>
+              <div class="col-md-8">
+                <input type="text" name="first_name" required
+                       class="form-control" id="inputFirstName"
+                       value="{{ request.user.first_name }}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputLastName" class="col-md-4 control-label">Last name</label>
+              <div class="col-md-8">
+                <input type="text" name="last_name" required
+                       class="form-control" id="inputLastName"
+                       value="{{ request.user.last_name }}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail" class="col-md-4 control-label">Email</label>
+              <div class="col-md-8">
+                <input type="email" name="email" required
+                       class="form-control" id="inputEmail"
+                       value="{{ request.user.email }}">
+              </div>
+            </div>
 
-        <div class="form-group">
-          <div class="col-md-offset-4 col-md-8">
-            <button type="submit" class="btn btn-primary" name="updateInfo">
-              Update
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
+            {% if update_info_message %}
+              <div class="col-md-offset-4 col-md-8">
+                <p class="text-success">{{ update_info_message }}</p>
+              </div>
+            {% endif %}
 
-    <div class="col-sm-6">
-      <h2>Change password</h2>
+            {% if update_info_error %}
+              <div class="col-md-offset-4 col-md-8">
+                <p class="text-danger">{{ update_info_error }}</p>
+              </div>
+            {% endif %}
 
-      <form action="" method="post" class="form-horizontal">
-        {% csrf_token %}
-
-        <div class="form-group">
-          <label for="inputOldPassword" class="col-md-4 control-label">Old Password</label>
-          <div class="col-md-8">
-            <input type="password" name="old_password" required
-                   class="form-control" id="inputOldPassword">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputPassword" class="col-md-4 control-label">New Password</label>
-          <div class="col-md-8">
-            <input type="password" name="password" required
-                   class="form-control" id="inputPassword">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputPassword2" class="col-md-4 control-label">Repeat New</label>
-          <div class="col-md-8">
-            <input type="password" name="password2" required
-                   class="form-control" id="inputPassword2">
-          </div>
+            <div class="form-group">
+              <div class="col-md-offset-4 col-md-8">
+                <button type="submit" class="btn btn-primary" name="updateInfo">
+                  Update
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
 
-        {% if change_password_message %}
-          <div class="col-md-offset-4 col-md-8">
-            <p class="text-success">{{ change_password_message }}</p>
-          </div>
-        {% endif %}
+      </div>
 
-        {% if change_password_error %}
-          <div class="col-md-offset-4 col-md-8">
-            <p class="text-danger">{{ change_password_error }}</p>
-          </div>
-        {% endif %}
+      <div class="col-sm-6 change-password-section-outer">
 
-        <div class="form-group">
-          <div class="col-md-offset-4 col-md-8">
-            <button type="submit" class="btn btn-primary" name="changePassword">
-              Change
-            </button>
-          </div>
+        <div class="content-section account-edit-section-inner">
+          <h2>Change password</h2>
+
+          <form action="" method="post" class="form-horizontal">
+            {% csrf_token %}
+
+            <div class="form-group">
+              <label for="inputOldPassword" class="col-md-4 control-label">Old Password</label>
+              <div class="col-md-8">
+                <input type="password" name="old_password" required
+                       class="form-control" id="inputOldPassword">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputPassword" class="col-md-4 control-label">New Password</label>
+              <div class="col-md-8">
+                <input type="password" name="password" required
+                       class="form-control" id="inputPassword">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputPassword2" class="col-md-4 control-label">Repeat New</label>
+              <div class="col-md-8">
+                <input type="password" name="password2" required
+                       class="form-control" id="inputPassword2">
+              </div>
+            </div>
+
+            {% if change_password_message %}
+              <div class="col-md-offset-4 col-md-8">
+                <p class="text-success">{{ change_password_message }}</p>
+              </div>
+            {% endif %}
+
+            {% if change_password_error %}
+              <div class="col-md-offset-4 col-md-8">
+                <p class="text-danger">{{ change_password_error }}</p>
+              </div>
+            {% endif %}
+
+            <div class="form-group">
+              <div class="col-md-offset-4 col-md-8">
+                <button type="submit" class="btn btn-primary" name="changePassword">
+                  Change
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
-      </form>
+
+      </div>
+
     </div>
 
   </div>
