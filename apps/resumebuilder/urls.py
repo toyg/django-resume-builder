@@ -36,5 +36,6 @@ urlpatterns = [
         name='resume-item-create'),
 
     url(r'^user/$', user_views.account_edit_view, name='account-edit'),
-    url(r'^create-account/$', user_views.account_create_view, name='account-create'),
+    url(r'^create-account/$', user_views.account_create_view,
+        name='account-create'),
 ]
