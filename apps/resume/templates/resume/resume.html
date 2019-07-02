@@ -1,74 +1,44 @@
 {% extends "base_logged_in.html" %}
-
+{% load static %}
 {% comment %}
 Template for viewing a resume.
 {% endcomment %}
 
 {% block styles %}
-  {{ block.super }}
-
-  <style>
-    div.resume-container {
-      margin: 24px auto 0;
-      max-width: 800px;
-    }
-
-    div.header-center-container {
-      text-align: center;
-
-      margin-top: 12px;
-    }
-
-    div.header-container {
-      text-align: left;
-
-      display: inline-block;
-    }
-
-    div.header-container > h3 {
-      margin-top: 0;
-
-      color: #666666;
-    }
-
-    section.resume-item {
-      margin-top: 36px;
-
-      position: relative;
-    }
-
-    section.resume-item > a.btn {
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-
-    div.resume-container > a.btn {
-      margin-top: 24px;
-      margin-bottom: 24px;
-    }
-  </style>
+	{{ block.super }}
+	<link rel="stylesheet" href="{% static "resume.css" %}"/>
 {% endblock %}
 
 {% block content %}
-  <div class="container content-section resume-container">
-    <div class="header-center-container">
-      <div class="header-container">
-        <h1>{{ request.user.first_name }} {{ request.user.last_name }}</h1>
-        <h3>{{ request.user.email }}</h3>
-      </div>
-    </div>
-
-    {% for resume_item in resume_items %}
-      <section class="resume-item">
-        <h3>{{ resume_item.title }}</h3>
-        <h4>{{ resume_item.company }}</h4>
-        <h4>{{ resume_item.start_date | date:"M Y"}} - {% if resume_item.end_date %}{{ resume_item.end_date | date:"M Y"}}{% else %}Present{% endif %}</h4>
-        {% if resume_item.description %}<p>{{ resume_item.description }}</p>{% endif %}
-        <a class="btn btn-primary" href="/resume/item/edit/{{ resume_item.id }}/">Edit</a>
-      </section>
-    {% endfor %}
-
-    <a class="btn btn-success" href="/resume/item/create/">Add New Item</a>
-  </div>
+		<div class="header-center-container">
+			<div class="header-container">
+				<h3 class="resume-title">{{ resume.label }}</h3>
+			</div>
+		</div>
+	<div class="container content-section resume-container">
+		<div class="header-center-container">
+			<div class="header-container">
+				<h1>{{ request.user.first_name }} {{ request.user.last_name }}</h1>
+				<h3>{{ request.user.email }}</h3>
+			</div>
+		</div>
+		<div class="">
+			<p>{{ resume.intro }}</p>
+			<a href="{% url 'resume-edit' resume.pk %}"
+			   class="btn btn-primary btn-edit">Edit Intro</a>
+		</div>
+		<a href="{% url 'resume-item-create' resume_pk=resume.pk %}"
+		   class="btn btn-primary btn-create">Add Role</a>
+		{% for link in resumelinks %}
+			<section class="resume-item">
+				<h3>{{ link.resumeitem.title }}</h3>
+				<h4>{{ link.resumeitem.company }}</h4>
+				<h4>{{ link.resumeitem.start_date | date:"M Y" }} -
+					{% if link.resumeitem.end_date %}{{ link.resumeitem.end_date | date:"M Y" }}{% else %}Present{% endif %}</h4>
+				{% if link.resumeitem.description %}<p>{{ link.resumeitem.description }}</p>{% endif %}
+				<a class="btn btn-primary"
+				   href="{% url 'resume-item-edit' resume_pk=resume.pk resume_item_id=link.resumeitem.pk %}">Edit</a>
+			</section>
+		{% endfor %}
+	</div>
 {% endblock %}

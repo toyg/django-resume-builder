@@ -1,0 +1,9 @@
+{% extends "resume/resume_base.html" %}
+{% comment %}
+Template for creating resumes
+{% endcomment %}
+{% block resume_header %}Create{% endblock %}
+{% block resume_content %}
+	{{ form.as_p }}
+{% endblock %}
+{% block resume_action %}Create{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base_logged_in.html" %}
+{% load static %}
+
+{% comment %}
+Template for listing resumes
+{% endcomment %}
+
+{% block styles %}
+	{{ block.super }}
+	<link rel="stylesheet" href="{% static "resume.css" %}"/>
+{% endblock %}
+
+
+{% block content %}
+	<h2>My Resumes</h2>
+
+	<a class="btn btn-default" id="resume-create-btn" href="{% url 'resume-create' %}">Create new resume</a>
+	{% for resume in resumes %}
+		<div class="resume">
+			<h3 class="resume-title">
+				<a href="{% url "resume-view" resume.pk %}"
+				   class="button">{{ resume.label }}</a></h3>
+			<p>{{ resume.description }}</p>
+			<a href="{% url "resume-delete" resume.pk %}"
+			   class="button">Delete</a>
+		</div>
+	{% endfor %}
+{% endblock %}

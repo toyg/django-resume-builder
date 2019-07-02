@@ -1,0 +1,16 @@
+{% extends "resume/resume_base.html" %}
+{% comment %}
+Template for Resume editing
+Not inheriting from base so that we can have scarier buttons
+{% endcomment %}
+
+{% block content %}
+	<strong>Are you sure you want to delete Resume "{{ object.label }}" ?</strong>
+	<form method="post">
+		{% csrf_token %}
+		<button type="submit" name="resume_delete"
+		        class="btn btn-danger delete-button"
+		        formmethod="post">Delete Resume
+		</button>
+	</form>
+{% endblock %}

@@ -13,12 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.views.generic import RedirectView
 
-from ..resume import views as resume_views
 from ..user import views as user_views
 
 urlpatterns = [
@@ -27,15 +26,12 @@ urlpatterns = [
     url('^login/$', auth_views.LoginView.as_view(), name='login'),
     url('^logout/$', auth_views.LogoutView.as_view(), name='logout'),
 
-    url(r'^$', RedirectView.as_view(pattern_name='resume')),
-
-    url(r'^resume/$', resume_views.resume_view, name='resume'),
-    url(r'^resume/item/edit/(\d+)/$', resume_views.resume_item_edit_view,
-        name='resume-item-edit'),
-    url(r'^resume/item/create/$', resume_views.resume_item_create_view,
-        name='resume-item-create'),
 
     url(r'^user/$', user_views.account_edit_view, name='account-edit'),
     url(r'^create-account/$', user_views.account_create_view,
         name='account-create'),
+
+    url(r'^resume/', include("apps.resume.urls")),
+    url(r'^$', RedirectView.as_view(pattern_name='resume-list')),
+
 ]

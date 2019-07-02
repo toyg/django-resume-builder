@@ -1,0 +1,39 @@
+    div.resume-container {
+      margin: 24px auto 0;
+      max-width: 800px;
+    }
+
+    div.header-center-container {
+      text-align: center;
+
+      margin-top: 12px;
+    }
+
+    div.header-container {
+      text-align: left;
+
+      display: inline-block;
+    }
+
+    div.header-container > h3 {
+      margin-top: 0;
+
+      color: #666666;
+    }
+
+    section.resume-item {
+      margin-top: 36px;
+
+      position: relative;
+    }
+
+    section.resume-item > a.btn {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    div.resume-container > a.btn {
+      margin-top: 24px;
+      margin-bottom: 24px;
+    }

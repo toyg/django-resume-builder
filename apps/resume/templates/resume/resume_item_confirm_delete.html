@@ -1,0 +1,19 @@
+{%  extends "base_logged_in.html" %}
+{%  load static %}
+{%  comment%}
+Template for deleting resume items
+{% endcomment %}
+
+{% block styles %}
+  {{ block.super }}
+	<link rel="stylesheet" href="{%  static "resume.css" %}" />
+{%  endblock %}
+
+{% block content %}
+	<p>Are you sure you want to delete Role "{{ context_object.title}}" ?</p>
+	<form method="post">
+		<button type="submit" name="resume_item_delete"
+		        class="btn btn-danger delete-button"
+		        formmethod="post">Delete Item</button>
+</form>
+{% endblock %}

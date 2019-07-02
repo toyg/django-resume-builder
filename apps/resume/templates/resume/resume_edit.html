@@ -1,0 +1,9 @@
+{% extends "resume/resume_base.html" %}
+{% comment %}
+Template for editing resume properties
+{% endcomment %}
+{% block resume_header %}Update{% endblock %}
+{% block resume_content %}
+	{{ form.as_p }}
+{% endblock %}
+{% block resume_action %}Update{% endblock %}

@@ -1,0 +1,20 @@
+{%  extends "base_logged_in.html" %}
+{%  load static %}
+{%  comment%}
+Template for Resume actions
+{% endcomment %}
+
+{% block styles %}
+  {{ block.super }}
+	<link rel="stylesheet" href="{%  static "resume.css" %}" />
+{%  endblock %}
+
+{% block content %}
+<form method="post">{% csrf_token %}
+	{% block resume_header %}{% endblock %}
+  {% block resume_content %}{% endblock %}
+  <button type="submit" name="resume_submit" class="btn btn-new"
+          formmethod="post">{% block resume_action %}{% endblock %} Resume</button>
+</form>
+{% endblock %}
+
