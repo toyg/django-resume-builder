@@ -33,7 +33,7 @@ the Django admin)
 
         <ul class="nav navbar-nav">
           <li role="presentation" {% if "/resume/" in request.path %}class="active"{% endif %}>
-            <a href="/resume/">Resume</a>
+            <a href="{% url 'resume-list' %}">My Resumes</a>
           </li>
           <li role="presentation" {% if "/user/" in request.path %}class="active"{% endif %}>
             <a href="/user/">User account</a>
